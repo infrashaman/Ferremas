@@ -1,0 +1,33 @@
+python -m venv venv   #Crear entorno virtual
+
+venv\Scripts\activate	#Entrar en entorno virtual
+
+py.exe .\manage.py makemigrations #Comprobar cambios para la base de datos
+py.exe .\manage.py migrate #Migrar cambios
+py.exe .\manage.py runserver #Ejecutar servidor
+
+pip install django  #Instalar django
+
+pip install djangorestframework #Instalar django rest framework
+
+pip install django-cors-headers #Controla quien se conecta a nuestro backend
+
+pip install psycopg2 pip install psycopg2-binary #Conexion con base de datos (ESPECIFICAMENTE POSTGRESQL)
+
+pip install dj-database-url #PENDIENTE
+
+pip install whitenoise #PENDIENTE
+
+pip install coreapi #PENDIENTE
+
+npm install #instalar react
+
+npm run dev #Ejectutar frontend
+
+npm i react-router-dom react-hot-toast axios react-hook-form #PENDIENTE
+
+
+
+
+
+

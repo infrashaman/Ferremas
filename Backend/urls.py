@@ -1,4 +1,4 @@
-"""django_crud_api URL Configuration
+"""Backend URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -21,7 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('tasks/', include('tasks.urls')),
+    path('tasks/', include('api.urls')),
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
 ]
 

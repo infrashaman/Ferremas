@@ -11,10 +11,10 @@ function App() {
         <Navigation />
         <Routes>
           {/* redirect to tasks */}
-          <Route path="/" element={<Navigate to="/tasks" />} />
-          <Route path="/tasks" element={<TasksPage />} />
-          <Route path="/tasks/:id" element={<TaskFormPage />} />
-          <Route path="/tasks-create" element={<TaskFormPage />} />
+          <Route path="/" element={<Navigate to="/productos" />} />
+          <Route path="/productos" element={<TasksPage />} />
+          <Route path="/productos/:id" element={<TaskFormPage />} />
+          <Route path="/productos-create" element={<TaskFormPage />} />
         </Routes>
         <Toaster />
       </div>
