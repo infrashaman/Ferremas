@@ -5,9 +5,9 @@ import { getAllCategorias } from "../Functions/categorias.api";
 import {
   createProducto,
   deleteProducto,
-  getProducto
+  getProducto,
 } from "../Functions/tasks.api";
-import { agregarProducto } from "../Functions/carros.api"
+import { agregarProducto } from "../Functions/carros.api";
 import { toast } from "react-hot-toast";
 
 export function TaskFormPage() {
@@ -27,7 +27,7 @@ export function TaskFormPage() {
     if (params.id) {
       const carroId = localStorage.getItem("carroId");
       await agregarProducto(carroId, params.id, 1); // Utiliza params.id en lugar de producto.pk
-      setCantidad((prevCantidad) => prevCantidad + 1); 
+      setCantidad((prevCantidad) => prevCantidad + 1);
       toast.success("Product Added to Cart", {
         position: "bottom-right",
         style: {
@@ -46,7 +46,6 @@ export function TaskFormPage() {
       });
     }
   });
-  
 
   useEffect(() => {
     async function loadProducto() {

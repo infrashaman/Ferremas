@@ -35,3 +35,11 @@ class CarroView(viewsets.ModelViewSet):
             PedidoProducto.objects.create(pedido=pedido, producto=item.producto, cantidad=item.cantidad)
         productos.delete()
         return Response({'status': 'pedido finalizado', 'total': total}, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['put'])
+    def update_carro(self, request, pk=None):
+        carro = self.get_object()
+        serializer = self.get_serializer(carro, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
