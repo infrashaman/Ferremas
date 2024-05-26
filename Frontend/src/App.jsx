@@ -1,10 +1,21 @@
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import { TaskFormPage } from "./pages/TaskFormPage";
 import { TasksPage } from "./pages/TasksPage";
 import { Toaster } from "react-hot-toast";
+import { createCarro } from "./Functions/carros.api";
 
 function App() {
+  useEffect(() => {
+    const carroId = localStorage.getItem("carroId");
+    if (!carroId) {
+      createCarro({}).then((response) => {
+        localStorage.setItem("carroId", response.data.id);
+      });
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="container mx-auto">

@@ -5,11 +5,11 @@ import { getAllCategorias } from "../Functions/categorias.api";
 import {
   createProducto,
   deleteProducto,
-  getProducto,
-  updateProducto,
+  getProducto
 } from "../Functions/tasks.api";
+import { agregarProducto } from "../Functions/carros.api"
 import { toast } from "react-hot-toast";
-import { agregarProducto, finalizarPedido } from "../Functions/carros.api";
+
 export function TaskFormPage() {
   const {
     register,
@@ -20,16 +20,15 @@ export function TaskFormPage() {
   const navigate = useNavigate();
   const params = useParams();
   const [categorias, setCategorias] = useState([]);
+  const [cantidad, setCantidad] = useState(0);
 
   const onSubmit = handleSubmit(async (data) => {
     console.log("Data before submit:", data);
     if (params.id) {
-      // Suponiendo que data.id contiene el ID del producto
-      const productoId = data.id;
-      // Suponiendo que carroId contiene el ID del carro
       const carroId = localStorage.getItem("carroId");
-      await agregarProducto(carroId, productoId, 1);
-      toast.success("New Task Added", {
+      await agregarProducto(carroId, params.id, 1); // Utiliza params.id en lugar de producto.pk
+      setCantidad((prevCantidad) => prevCantidad + 1); 
+      toast.success("Product Added to Cart", {
         position: "bottom-right",
         style: {
           background: "#101010",
@@ -46,9 +45,8 @@ export function TaskFormPage() {
         },
       });
     }
-
-    navigate("/productos");
   });
+  
 
   useEffect(() => {
     async function loadProducto() {
@@ -138,6 +136,14 @@ export function TaskFormPage() {
           className="bg-zinc-700 p-3 rounded-lg block w-full mb-3"
         />
         {errors.stock && <span>This field is required</span>}
+
+        <button
+          type="button"
+          className="bg-green-500 p-3 rounded-lg block w-full mt-3"
+          onClick={handleSubmit(onSubmit)}
+        >
+          Add to Cart ({cantidad})
+        </button>
 
         <button className="bg-indigo-500 p-3 rounded-lg block w-full mt-3">
           Save
