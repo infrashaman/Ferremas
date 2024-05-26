@@ -1,11 +1,5 @@
 from rest_framework import serializers
-from .models import Task, Categoria, Producto, Precio, Pedido, PedidoProducto, ConversionDivisa
-
-class TaskSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Task
-        # fields = ('id', 'title', 'description', 'done')
-        fields = '__all__'
+from .models import Categoria, Producto, Carro, CarroProducto, Pedido, PedidoProducto
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,15 +7,20 @@ class CategoriaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductoSerializer(serializers.ModelSerializer):
-    categoria = serializers.PrimaryKeyRelatedField(queryset=Categoria.objects.all())
-
     class Meta:
         model = Producto
         fields = '__all__'
 
-class PrecioSerializer(serializers.ModelSerializer):
+class CarroProductoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Precio
+        model = CarroProducto
+        fields = '__all__'
+
+class CarroSerializer(serializers.ModelSerializer):
+    productos = CarroProductoSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Carro
         fields = '__all__'
 
 class PedidoProductoSerializer(serializers.ModelSerializer):
@@ -35,9 +34,3 @@ class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
         fields = '__all__'
-
-class ConversionDivisaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ConversionDivisa
-        fields = '__all__'
-

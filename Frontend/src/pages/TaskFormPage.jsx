@@ -9,7 +9,7 @@ import {
   updateProducto,
 } from "../Functions/tasks.api";
 import { toast } from "react-hot-toast";
-
+import { agregarProducto, finalizarPedido } from "../Functions/carros.api";
 export function TaskFormPage() {
   const {
     register,
@@ -24,8 +24,12 @@ export function TaskFormPage() {
   const onSubmit = handleSubmit(async (data) => {
     console.log("Data before submit:", data);
     if (params.id) {
-      await updateProducto(params.id, data);
-      toast.success("Task updated", {
+      // Suponiendo que data.id contiene el ID del producto
+      const productoId = data.id;
+      // Suponiendo que carroId contiene el ID del carro
+      const carroId = localStorage.getItem("carroId");
+      await agregarProducto(carroId, productoId, 1);
+      toast.success("New Task Added", {
         position: "bottom-right",
         style: {
           background: "#101010",
@@ -65,7 +69,7 @@ export function TaskFormPage() {
   useEffect(() => {
     async function fetchData() {
       const response = await getAllCategorias();
-      setCategorias(response.data); 
+      setCategorias(response.data);
     }
     fetchData();
   }, []);

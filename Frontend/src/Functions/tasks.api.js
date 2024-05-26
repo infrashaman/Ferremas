@@ -20,6 +20,3 @@ export const updateProducto = (id, producto) => tasksApi.put(`/${id}/`, producto
 
 export const deleteProducto = (id) => tasksApi.delete(`/${id}`);
 
-/* export const addToCart = (productId) => api.post(`productos/${productId}/add_to_cart/`);
-
-export const checkout = () => api.post("pedidos/checkout/"); */
