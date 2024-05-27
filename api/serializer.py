@@ -11,26 +11,22 @@ class ProductoSerializer(serializers.ModelSerializer):
         model = Producto
         fields = '__all__'
 
+class CarroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Carro
+        fields = '__all__'
+
 class CarroProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarroProducto
         fields = '__all__'
 
-class CarroSerializer(serializers.ModelSerializer):
-    productos = CarroProductoSerializer(many=True, read_only=True)
-
+class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Carro
+        model = Pedido
         fields = '__all__'
 
 class PedidoProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = PedidoProducto
-        fields = '__all__'
-
-class PedidoSerializer(serializers.ModelSerializer):
-    productos = PedidoProductoSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Pedido
         fields = '__all__'

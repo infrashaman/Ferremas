@@ -34,7 +34,11 @@ class CarroView(viewsets.ModelViewSet):
         for item in productos:
             PedidoProducto.objects.create(pedido=pedido, producto=item.producto, cantidad=item.cantidad)
         productos.delete()
-        return Response({'status': 'pedido finalizado', 'total': total}, status=status.HTTP_200_OK)
+
+        # Crear un nuevo carrito vacío después de finalizar el pedido
+        nuevo_carro = Carro.objects.create(usuario=carro.usuario)
+        
+        return Response({'status': 'pedido finalizado', 'total': total, 'nuevo_carro_id': nuevo_carro.pk}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['put'])
     def update_carro(self, request, pk=None):
